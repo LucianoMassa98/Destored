@@ -24,7 +24,7 @@ app.use(cors(options));
 
 //app.use(cors()); // si lo hacemos asi, habilitamos a cualquier dominio
 
-require('./utils/auth/index');
+
 
 routerApi(app);
 
@@ -38,38 +38,3 @@ app.listen(port, ()=>{
 });
 
 
-/*
--> Compras= {
-
-  ** v0.1 **
-  -> crear compra directa que afecte stock
-  -> crear compra indirecta
-  }
-
-  ventas = {
-  ** v0.1 **
-  -> crear venta directa, que afecte stock
-
- cobros = {
-  ** v0.1 **
-  -> crear orden de cobro que afecte a las cuentas
-
- }
-
-  pagos = {
-  ** v0.1 **
-  -> crear orden de pago que afecte a las cuentas
-
- }
-
- cuentas={
-    ** v0.1 **
-  -> poder visualizar eñ estado de cuentas
-  ->
- }
- impresora = {
-  ** v0.1 **
-  -> elegir impresora e imprimir ventas, compras o informes
-
- }
-*/

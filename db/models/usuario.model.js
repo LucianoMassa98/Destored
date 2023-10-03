@@ -1,6 +1,6 @@
 const {Model,DataTypes, Sequelize} = require('sequelize');
-const {NEGOCIO_TABLE}=require('../models/negocio.model');
-const {CUENTA_TABLE}=require('../models/cuenta.model');
+const {PERFIL_TABLE}=require('../models/perfil.model');
+const {ROLE_TABLE}=require('../models/role.model');
 
 //const {ROLE_TABLE}=require('../models/role.model');
 const USUARIO_TABLE = 'usuarios';
@@ -11,64 +11,31 @@ const usuarioSchema  = {
     primaryKey: true,
     type: DataTypes.INTEGER
   },
-  negocioId:{
-    field: 'negocio_id',
+  perfilId:{
+    field: 'perfil_id',
     allowNull: false,
     type: DataTypes.INTEGER,
+    unique: true,
     references: {
-      model: NEGOCIO_TABLE,
+      model: PERFIL_TABLE,
       key: 'id'
     },
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL'
 
   },
-  cuentaId:{
-    field: 'cuenta_id',
+  roleId:{
+    field: 'role_id',
     allowNull: false,
     type: DataTypes.INTEGER,
     unique: true,
     references: {
-      model: CUENTA_TABLE,
+      model: ROLE_TABLE,
       key: 'id'
     },
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL'
 
-  },
-  nombre: {
-    allowNull: false,
-    type: DataTypes.STRING,
-  },
-  celular: {
-    allowNull: false,
-    type: DataTypes.STRING,
-  },
-  direccion: {
-    allowNull: false,
-    type: DataTypes.STRING,
-  },
-  email: {
-    allowNull: false,
-    type: DataTypes.STRING,
-    unique: true,
-  },
-  password: {
-    allowNull: false,
-    type: DataTypes.STRING
-  },
-  recoveryToken: {
-    field: 'recovery_token',
-    allowNull: true,
-    type: DataTypes.STRING
-  },
-  imagen: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
-  role: {
-    allowNull: true,
-    type: DataTypes.STRING,
   },
   createdAt: {
     allowNull: false,
@@ -82,10 +49,8 @@ class Usuario extends Model{
   // crear metodos estaticos
   static associate(models){
 
-    this.belongsTo(models.Negocio, {as: 'negocio'});
-    this.belongsTo(models.Cuenta, {as: 'cuenta'});
-    this.hasMany(models.Compra, {as: 'compras', foreignKey: 'usuarioId'});
-    this.hasMany(models.Venta, {as: 'ventas', foreignKey: 'usuarioId'});
+    this.belongsTo(models.Perfil, {as: 'perfil'});
+    this.belongsTo(models.Role, {as: 'roles'});
 
 
   }

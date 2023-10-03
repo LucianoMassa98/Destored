@@ -1,38 +1,46 @@
 const joi = require('joi');
 const id = joi.number().integer();
-const negocioId = joi.number().integer();
-const nombre = joi.string();
-const celular = joi.string();
-const direccion = joi.string();
-const email=joi.string().email();
 const password=joi.string().min(8);
-const role = joi.string().min(3);
+const username=joi.string().min(3);
 
 const createusuarioSchema = joi.object({
-  negocioId: negocioId.required(),
-  nombre: nombre.required(),
-  celular: celular.required(),
-  direccion: direccion.required(),
-  email:email.required(),
-  password:password.required(),
-  role:role.required()
+  clinicaId: id.required(),
+  perfilId: id.required(),
+  username: username.required(),
+  password: password.required(),
+
+});
+const addroleSchema = joi.object({
+  usuarioId: id.required(),
+  roleId: id.required()
+
+});
+const subtractroleSchema = joi.object({
+  usuarioId: id.required(),
+  roleId: id.required()
+
 });
 const updateusuarioSchema = joi.object({
- nombre,
- celular,
- direccion,
- email,
- password,
- role
+  username,
+  password
+});
+const loginusuarioSchema = joi.object({
+  username: username.required(),
+  password: password.required()
+
 });
 const getusuarioSchema = joi.object({
+  clinicaId: id.required(),
   usuarioId: id.required()
 });
 
 module.exports = {
   createusuarioSchema,
   updateusuarioSchema,
-  getusuarioSchema
+  getusuarioSchema,
+  loginusuarioSchema,
+  addroleSchema,
+  subtractroleSchema
   };
 
 
